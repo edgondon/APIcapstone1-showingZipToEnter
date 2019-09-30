@@ -56,7 +56,7 @@ function consoleResponse(responseJson) {
 }
 
 
-function initMap() {
+function initMap(json) {
     let map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 10
@@ -66,11 +66,11 @@ function initMap() {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
+            let pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
+            geoClouder(pos);    
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
@@ -84,6 +84,26 @@ function initMap() {
     }
 }
 
+
+function showEvents(json) {
+    for(var i=0; i<json.page.size; i++) {
+      $("#events").append("<p>"+json._embedded.events[i].name+"</p>");
+    }
+  }
+
+
+  function addMarker(map, event) {
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+      map: map
+    });
+    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+    console.log(marker);
+  }
+
+
+
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
@@ -91,6 +111,29 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+function geoClouder(t) {
+    console.log(t);
+    let ll = `${t.lat},${t.long}`;
+
+    $.ajax({
+        type:"GET",
+        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&${ll}`,
+        async:true,
+        dataType: "json",
+        success: function(json) {
+                    console.log(json);
+                    let e = document.getElementById("events");
+                    e.innerHTML = json.page.totalElements + " events found.";
+                    showEvents(json);
+                    initMap(position, json);
+                 },
+        error: function(xhr, status, err) {
+                    console.log(err);
+                 }
+      });
+  
+  }
 
 
 
