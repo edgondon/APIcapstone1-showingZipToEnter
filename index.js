@@ -33,7 +33,12 @@ function initMap(json) {
 
 function showEvents(json) {
     for(var i=0; i<json.page.size; i++) {
-      $("#events").append("<p>"+json._embedded.events[i].name+"</p>");
+      $("#events").append(`<p>${json._embedded.events[i].name}</p>
+            <p>Date of Event: ${json._embedded.events[i].dates.start.localDate}</p>
+            <p>Distance in Miles: ${json._embedded.events[i].distance}</p>
+            <a href="${json._embedded.events[i].url}">Link for Tickets and More</a>
+            `);
+      
     }
   }
 
