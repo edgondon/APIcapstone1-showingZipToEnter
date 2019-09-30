@@ -36,7 +36,7 @@ function showEvents(json) {
       $("#events").append(`<p>${json._embedded.events[i].name}</p>
             <p>Date of Event: ${json._embedded.events[i].dates.start.localDate}</p>
             <p>Distance in Miles: ${json._embedded.events[i].distance}</p>
-            <a href="${json._embedded.events[i].url}">Link for Tickets and More</a>
+            <a href="${json._embedded.events[i].url}" target="_blank">Link for Tickets and More</a>
             `);
       
     }
@@ -69,7 +69,7 @@ function geoClouder(t) {
 
     $.ajax({
         type:"GET",
-        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${ll}&unit=miles&radius=25`,
+        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${ll}&unit=miles&radius=5&startDateTime=2019-10-01T08:00:00Z&endDateTime=2019-10-30T07:59:00Z&size=190`,
         async:true,
         dataType: "json",
         success: function(json) {
