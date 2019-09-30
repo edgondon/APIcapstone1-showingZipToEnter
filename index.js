@@ -1,59 +1,5 @@
 'use strict';
 
-const apiKey = 'BQl4kqXRIHiCHp1f1H7kn311pvWMbh11cByBz2nZ';
-const searchURL = 'https://developer.nps.gov/api/v1/parks';
-
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    return queryItems.join('&');
-}
-
-function getParkStatesList(query, maxResults = 10) {
-    const params = {
-        stateCode: query,
-        limit: maxResults,
-        api_key: apiKey,
-    };
-    const queryString = formatQueryParams(params)
-    const url = searchURL + '?' + queryString;
-
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
-        })
-
-        .then(responseJson => consoleResponse(responseJson))
-        .catch(err => {
-            $('#errod').append(`Something went wrong: ${err.message}`);
-        });
-
-}
-
-
-function consoleResponse(responseJson) {
-
-    console.log("huh?");
-    console.log(responseJson);
-
-
-
-
-    for (let i = 0; i < responseJson.data.length; i++) {
-
-        $(".results").append(
-            `<li><p>${responseJson.data[i].fullName}</p>
-       <p>${responseJson.data[i].description}</p>
-        <h3><a href="${responseJson.data[i].url}">${responseJson.data[i].url}</a></h3>
-        </li>`
-        )
-    };
-
-
-}
 
 
 function initMap(json) {
@@ -111,14 +57,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
-
+// geoClouder(t) pulls geocodes from google initmaps(json) function
 function geoClouder(t) {
     console.log(t);
-    let ll = `${t.lat},${t.long}`;
+    let ll = `${t.lat},${t.lng}`;
 
     $.ajax({
         type:"GET",
-        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&${ll}`,
+        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${ll}&unit=miles&radius=25`,
         async:true,
         dataType: "json",
         success: function(json) {
@@ -145,9 +91,7 @@ function watchEnter() {
         event.preventDefault();
         $('#errod').empty();
         $('.results').empty();
-        const searchTerm = $('#myForm').val();
-        const maxResults = $('#numblum').val();
-        getParkStatesList(searchTerm, maxResults);
+
     });
 }
 
