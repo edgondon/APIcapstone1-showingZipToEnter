@@ -19,17 +19,17 @@
 
     <div>
         <form>
-            <label for="State">Enter 2 Letter State</label>
-            <input type="text" id="myForm" name="State" required>
+            <label for="State">Enter Radius of Search in Miles</label>
+            <input type="number" id="radiuss" name="Radius" min="1" max="100" value="25" required>
             <label for="numSearch">Maximum Results</label>
-            <input type="number" id="numblum" name="numSearch" value="10">
+            <input type="text" name="startD" placeholder="YYYY-MM-DD" value="today" required>
             <input type="submit"  value="Submit Request">
         </form>
 
     </div>
 
-    <div id="map"></div>
-    <div id="events"></div>
+    <div id="map" class="hidden"></div>
+    <div id="events" class="hidden"></div>
 
     <div>
         <h2 id="errod">
