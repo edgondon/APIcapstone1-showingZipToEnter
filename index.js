@@ -16,7 +16,7 @@ function initMap(json) {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            geoClouder(pos);    
+            longlat.push(pos);    
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
@@ -30,6 +30,8 @@ function initMap(json) {
     }
 }
 
+
+let longlat = [];
 
 function showEvents(json) {
     for(var i=0; i<json.page.size; i++) {
@@ -63,28 +65,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 // geoClouder(t) pulls geocodes from google initmaps(json) function
-function geoClouder(t) {
-    console.log(t);
-    let ll = `${t.lat},${t.lng}`;
 
-    $.ajax({
-        type:"GET",
-        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${ll}&unit=miles&radius=100&startDateTime=2019-10-01T08:00:00Z&endDateTime=2019-10-30T07:59:00Z&size=190`,
-        async:true,
-        dataType: "json",
-        success: function(json) {
-                    console.log(json);
-                    let e = document.getElementById("events");
-                    e.innerHTML = json.page.totalElements + " events found.";
-                    showEvents(json);
-                    initMap(position, json);
-                 },
-        error: function(xhr, status, err) {
-                    console.log(err);
-                 }
-      });
-  
-  }
 
   function datesinConsole() {
     let now = new Date();
@@ -103,17 +84,42 @@ function geoClouder(t) {
 
 
 $("form").append(`
-<label for="State">Enter Radius of Search in Miles</label>
+<label for="Radius">Enter Radius of Search in Miles</label>
 <input type="number" id="radiuss" name="Radius" min="1" max="100" value="25" required>
 <label for="State">FIRST DATE IN RANGE YYYY-MM-DD</label>
 <input type="date" id="alpha" name="State" value="${today}" required>
 <label for="numSearch">SECOND DATE IN RANGE YYYY-MM-DD</label>
 <input type="date" id="omega" name="numSearch" value="${today2}">
 <input type="submit"  value="Submit Request">`);
+
   
 };
 
 
+function infosubmit (alpha, omega, radiuss) {
+    
+    console.log(longlat);
+    console.log(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${longlat[0].lat},${longlat[0].lng}&unit=miles&radius=${radiuss}&startDateTime=${alpha}T08:00:00Z&endDateTime=${omega}T07:59:00Z&size=190`);
+     $.ajax({
+        type:"GET",
+        url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${longlat[0].lat},${longlat[0].lng}&unit=miles&radius=${radiuss}&startDateTime=${alpha}T08:00:00Z&endDateTime=${omega}T07:59:00Z&size=190`,
+        async:true,
+        dataType: "json",
+        success: function(json) {
+                    console.log(json);
+                    let e = document.getElementById("events");
+                    e.innerHTML = json.page.totalElements + " events found.";
+                    showEvents(json);
+                    initMap(position, json);
+                 },
+        error: function(xhr, status, err) {
+                    console.log(err);
+                 }
+      }); 
+
+
+
+}
 
 function watchEnter() {
     datesinConsole();
@@ -121,9 +127,17 @@ function watchEnter() {
         event.preventDefault();
         $('#errod').empty();
         $('.results').empty();
+        let alpha = $('#alpha').val();
+        let omega = $('#omega').val();
+        let radiuss = $('#radiuss').val();
+
+        
+        
         $('#map').removeClass('hidden');
         $('#events').removeClass('hidden');
-        initMap();
+        infosubmit(alpha, omega, radiuss);
+        console.log('hello');
+        
     });
 }
 
