@@ -42,8 +42,10 @@ function showEvents(json) {
             <p>Distance in Miles: ${json._embedded.events[i].distance}</p>
             <p>Address: ${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}</p>
             <form id="form2">
-            <input type="text" id="start" name="startaddress" value="${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}" required>
-            <input type="radio" id="directions"  value="Get Directions">Get Directions</input>
+            <input type="radio" id="start" name="startaddress" value="${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}">Get Directions</input>
+            <button type="button" for="startaddress" onclick="displayRadioValue()"> 
+                Submit 
+            </button> 
             </form>
             <a href="${json._embedded.events[i].url}" target="_blank">Link for Tickets</a>
             `);
@@ -52,14 +54,6 @@ function showEvents(json) {
   }
 
 
-  function addMarker(map, event) {
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
-      map: map
-    });
-    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-    console.log(marker);
-  }
 
 
 
@@ -71,7 +65,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
-// geoClouder(t) pulls geocodes from google initmaps(json) function
+
 
 
   function datesinConsole() {
@@ -141,15 +135,14 @@ function initMap2() {
     let control = document.getElementById('floating-panel');
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
 
-    var onChangeHandler = function() {
-      calculateAndDisplayRoute(directionsService, directionsRenderer);
-    };
 
   }
 
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = `${longlat[0].lat},${longlat[0].lng}`;
+    console.log(`${addressGo}`);
     let end = `${addressGo}`;
     directionsService.route({
       origin: start,
@@ -164,14 +157,21 @@ function initMap2() {
     });
   }
 
-function goTo() {
-    $('#form2').click(event => {
-        event.preventDefault();
-        let place = $('#form2').val();
-        addressGo.push(place);
-        console.log(place);
-    });
-}
+function displayRadioValue() { 
+    let ele = document.getElementById("start").value; 
+    addressGo.push(ele);    
+    console.log(ele);
+    initMap2();
+
+    } 
+
+
+
+
+
+
+
+
 
 
 
@@ -197,7 +197,7 @@ function watchEnter() {
         console.log('hello');
         
     });
-    goTo();
+
 }
 
 $(watchEnter);
