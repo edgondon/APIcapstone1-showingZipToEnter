@@ -38,6 +38,7 @@ function showEvents(json) {
       $("#events").append(`<p>${json._embedded.events[i].name}</p>
             <p>Date of Event: ${json._embedded.events[i].dates.start.localDate}</p>
             <p>Distance in Miles: ${json._embedded.events[i].distance}</p>
+            <p>Address: ${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode} </p>
             <a href="${json._embedded.events[i].url}" target="_blank">Link for Tickets and More</a>
             `);
       
