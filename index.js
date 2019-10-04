@@ -42,7 +42,7 @@ function showEvents(json) {
             <p>Distance in Miles: ${json._embedded.events[i].distance}</p>
             <p>Address: ${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}</p>
             <form id="form2">
-            <input type="radio" id="start" name="startaddress" value="${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}">Get Directions</input>
+            <input type="radio" id="start" class="helper" name="startaddress" value="${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}">Get Directions</input>
             <button type="button" for="startaddress" onclick="displayRadioValue()"> 
                 Submit 
             </button> 
@@ -158,7 +158,7 @@ function initMap2() {
   }
 
 function displayRadioValue() { 
-    let ele = document.getElementById("start").value; 
+    let ele = $('.helper:checked').val(); 
     addressGo.push(ele);    
     console.log(ele);
     initMap2();
