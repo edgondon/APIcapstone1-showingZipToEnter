@@ -67,7 +67,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-
+// establish date range for search criteria - upon initial load of page (default values)
   function datesinConsole() {
     let now = new Date();
     let month = (now.getMonth() + 1);               
@@ -123,6 +123,7 @@ function infosubmit (alpha, omega, radiuss) {
 }
 
 function initMap2() {
+    
     let directionsRenderer = new google.maps.DirectionsRenderer;
     let directionsService = new google.maps.DirectionsService;
     let map = new google.maps.Map(document.getElementById('map'), {
@@ -132,11 +133,17 @@ function initMap2() {
     directionsRenderer.setMap(map);
     directionsRenderer.setPanel(document.getElementById('right-panel'));
 
+
+    if (document.getElementById('floating-panel')==null) {
+
     let control = document.getElementById('floating-panel');
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
     calculateAndDisplayRoute(directionsService, directionsRenderer);
-
+    }
+    else {
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+    }  
 
   }
 
@@ -161,6 +168,7 @@ function displayRadioValue() {
     let ele = $('.helper:checked').val(); 
     addressGo.push(ele);    
     console.log(ele);
+    
     initMap2();
 
     } 
@@ -182,12 +190,13 @@ function watchEnter() {
     datesinConsole();
     $('#form1').submit(event => {
         event.preventDefault();
-        $('#errod').empty();
+        $('#right-panel').empty();
         $('.results').empty();
+// each time user submits form on top of page the three values below are reset accordingly:
         let alpha = $('#alpha').val();
         let omega = $('#omega').val();
         let radiuss = $('#radiuss').val();
-
+        addressGo.length = 0;
         
         
         $('#map').removeClass('hidden');
