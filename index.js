@@ -77,7 +77,7 @@ function showEvents(json) {
     let nums = Math.min(json.page.size, json.page.totalElements);
     for(var i=0; i<nums; i++) {
       let output = "";
-      if(json._embedded.events[i]._embedded.venues[0].state == undefined) {
+      if(json._embedded.events[i]._embedded.venues[0].state === undefined) {
         output = "no state";
       }
       else {
