@@ -1,5 +1,44 @@
 'use strict';
 
+function checkValue(inputValue) {
+  let outputValue = inputValue;
+  if (inputValue == "") {
+      outputValue = 0;
+  }
+  if (inputValue == undefined) {
+      outputValue = 0;
+  }
+  if (inputValue == null) {
+      outputValue = 0;
+  }
+  return outputValue;
+}
+
+function checkText(inputText) {
+  let outputText = inputText;
+  if (inputText == undefined) {
+      outputText = "";
+  }
+  if (inputText == null) {
+      outputText = "";
+  }
+  return outputText;
+}
+
+function checkURL(inputURL) {
+  let outputURL = inputURL;
+  if (inputURL == undefined) {
+      outputURL = "/";
+  }
+  if (inputURL == null) {
+      outputURL = "/";
+  }
+  return outputURL;
+}
+
+
+
+
 
 
 function initMap(json) {
@@ -37,17 +76,17 @@ let addressGo = [];
 function showEvents(json) {
     let nums = Math.min(json.page.size, json.page.totalElements);
     for(var i=0; i<nums; i++) {
-      $("#events").append(`<p>${json._embedded.events[i].name}</p>
-            <p>Date of Event: ${json._embedded.events[i].dates.start.localDate}</p>
-            <p>Distance in Miles: ${json._embedded.events[i].distance}</p>
-            <p>Address: ${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}</p>
+      $("#events").append(`<p>${checkText(json._embedded.events[i].name)}</p>
+            <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+            <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
+            <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
             <form id="form2">
-            <input type="radio" id="start" class="helper" name="startaddress" value="${json._embedded.events[i]._embedded.venues[0].address.line1}, ${json._embedded.events[i]._embedded.venues[0].city.name}, ${json._embedded.events[i]._embedded.venues[0].state.stateCode}, ${json._embedded.events[i]._embedded.venues[0].postalCode}">Get Directions</input>
+            <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
             <button type="button" for="startaddress" onclick="displayRadioValue()"> 
                 Submit 
             </button> 
             </form>
-            <a href="${json._embedded.events[i].url}" target="_blank">Link for Tickets</a>
+            <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
             `);
       
     }
@@ -165,10 +204,13 @@ function initMap2() {
   }
 
 function displayRadioValue() { 
+    
+  addressGo.length = 0;
+    $('#right-panel').empty();
     let ele = $('.helper:checked').val(); 
     addressGo.push(ele);    
     console.log(ele);
-    
+    $('#events').addClass('hidden');
     initMap2();
 
     } 
