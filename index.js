@@ -80,6 +80,7 @@ function showEvents(json) {
     if(json._embedded.events[i]._embedded.venues[0].country.countryCode === "US") {
       output = json._embedded.events[i]._embedded.venues[0].state.stateCode;
       $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
+          <p><u>Venue:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
           <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
           <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
           <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
@@ -98,6 +99,7 @@ function showEvents(json) {
     else {
       output.push(`${json._embedded.events[i]._embedded.venues[0].location.latitude},${json._embedded.events[i]._embedded.venues[0].location.longitude}`);
       $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
+      <p><u>Venue:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
           <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
           <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
           <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
