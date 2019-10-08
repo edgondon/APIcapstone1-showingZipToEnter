@@ -79,32 +79,38 @@ function showEvents(json) {
     let output = [];
     if(json._embedded.events[i]._embedded.venues[0].country.countryCode === "US") {
       output = json._embedded.events[i]._embedded.venues[0].state.stateCode;
-      $("#events").append(`<li><p>${checkText(json._embedded.events[i].name)}</p>
-          <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
-          <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
-          <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+      $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
+          <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+          <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
+          <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
           <form id="form2">
           <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
           <button type="button" for="startaddress" onclick="displayRadioValue()"> 
               Submit 
           </button> 
           </form>
-          <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a></li>
+          <div class="blunk">
+          <a class="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+          </div>
+          </li>
           `);
     }
     else {
       output.push(`${json._embedded.events[i]._embedded.venues[0].location.latitude},${json._embedded.events[i]._embedded.venues[0].location.longitude}`);
-      $("#events").append(`<li><p>${checkText(json._embedded.events[i].name)}</p>
-          <p>Date of Event: ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
-          <p>Distance in Miles: ${checkValue(json._embedded.events[i].distance)}</p>
-          <p>Address: ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+      $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
+          <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+          <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
+          <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
           <form id="form2">
           <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
           <button type="button" for="startaddress" onclick="displayRadioValue()"> 
               Submit 
           </button> 
           </form>
-          <a href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a></li>
+          <div class="blunk">
+          <a id="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+          </div>
+          </li>
           `);
         }
     
@@ -144,9 +150,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 $('#form1').append(`
 <label for="Radius">Enter Radius of Search in Miles</label>
 <input type="number" id="radiuss" name="Radius" min="1" max="100" value="25" required>
-<label for="State">FIRST DATE IN RANGE YYYY-MM-DD</label>
+<label for="State">Begin Event Date</label>
 <input type="date" id="alpha" name="State" value="${today}" required>
-<label for="numSearch">SECOND DATE IN RANGE YYYY-MM-DD</label>
+<label for="numSearch">End Event Date</label>
 <input type="date" id="omega" name="numSearch" value="${today2}">
 <input type="submit"  value="Submit Request">`);
 
