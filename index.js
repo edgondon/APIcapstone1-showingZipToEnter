@@ -231,7 +231,7 @@ function initMap2() {
   }
 
 function displayRadioValue() { 
-    
+  $('#right-panel').removeClass('hidden');  
   addressGo.length = 0;
     $('#right-panel').empty();
     let ele = $('.helper:checked').val(); 
@@ -269,6 +269,7 @@ function watchEnter() {
         
         $('#map').removeClass('hidden');
         $('#events').removeClass('hidden');
+        
         infosubmit(alpha, omega, radiuss);
         
         console.log('hello');
