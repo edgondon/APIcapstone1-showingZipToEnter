@@ -165,7 +165,7 @@ $('#form1').append(`
 </div>
 </div>
 <div id="fline2">
-<input type="submit"  value="Submit Request">
+<input type="submit" class="button1" value="Submit Request">
 </div>`);
 
   

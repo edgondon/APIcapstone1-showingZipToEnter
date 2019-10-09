@@ -20,9 +20,11 @@ h1 {
 
 #form1 {
   background-color: rgb(176, 167, 231);
-  width: 50%;
-  margin-bottom: 10px;
-  padding: 10px;
+  -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+  box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+  width: 60%;
+  margin-bottom: 30px;
+  padding: 30px;
   margin-left: auto;
   margin-right: auto;
 
@@ -38,6 +40,34 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+.button1 {
+  box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+	background-color:#79bbff;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+
+.button1:hover {
+  background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+	background-color:#378de5;
+}
+
+.button:active {
+  position:relative;
+	top:1px;
+}
+
 
 #form2 {
   margin-bottom: 10px;
@@ -58,6 +88,8 @@ h1 {
   margin-top: 0;
   height: 700 px;
   width: 100%;
+  -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 1px 8px 50px 21px rgba(129,178,255,0.65); 
+  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 1px 8px 50px 21px rgba(129,178,255,0.65);
   float: top;
   display: inline-flex;
   flex-direction: row;
