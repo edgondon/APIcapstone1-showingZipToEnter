@@ -150,13 +150,23 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
 $('#form1').append(`
-<label for="Radius">Enter Radius of Search in Miles</label>
+<div id="fline1">
+<div>
+<label class="lab1" for="Radius">Radius of Search in Miles</label>
 <input type="number" id="radiuss" name="Radius" min="1" max="100" value="25" required>
-<label for="State">Begin Event Date</label>
+</div>
+<div>
+<label class="lab1" for="State">Begin Event Date</label>
 <input type="date" id="alpha" name="State" value="${today}" required>
-<label for="numSearch">End Event Date</label>
+</div>
+<div>
+<label class="lab1" for="numSearch">End Event Date</label>
 <input type="date" id="omega" name="numSearch" value="${today2}">
-<input type="submit"  value="Submit Request">`);
+</div>
+</div>
+<div id="fline2">
+<input type="submit"  value="Submit Request">
+</div>`);
 
   
 };
