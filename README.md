@@ -18,7 +18,15 @@ Each time the user enters a new search (and presses the submit button), the scre
 
 ![GetDirections](https://github.com/edgondon/APIcapstone1/blob/master/screenshots/GetDirections.png)
 
+## App Technology
 
+* Javascript
+* HTML
+* CSS
+
+## Demo
+
+- [Demo](https://edgondon.github.io/APIcapstone1/)
 
 
 
