@@ -1,7 +1,8 @@
-This is a GET API program or app that uses the National Park Service website.
-The user enters a two letter State into the query box to search for parks in a region, and sets a maximum amount of returned search items.
-The returned results displayed on the screen include the Full Name of the park, the description of the park, as well as the Website URL address for the park.
-Each time the user enters a new search (and presses the submit button), the screen will display results for the new search.
+Local Events Search App
+
+This app allows the user to find events in their local area.
+The features included in the App will allow a date range filter as well as a filter
+for a range (radius) in miles around the user's location.
 
 ## User will be able to input filters (parameters) for search here. 
 
