@@ -80,10 +80,10 @@ function showEvents(json) {
     if(json._embedded.events[i]._embedded.venues[0].country.countryCode === "US") {
       output = json._embedded.events[i]._embedded.venues[0].state.stateCode;
       $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
-          <p><u>Venue:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
-          <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
-          <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
-          <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+          <p><i>Venue:</i> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
+          <p><i>Date of Event:</i> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+          <p><i>Distance in Miles:</i> ${checkValue(json._embedded.events[i].distance)}</p>
+          <p><i>Address:</i> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
           <form id="form2">
           <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
           <button type="button" for="startaddress" onclick="displayRadioValue()"> 
@@ -100,9 +100,9 @@ function showEvents(json) {
       output.push(`${json._embedded.events[i]._embedded.venues[0].location.latitude},${json._embedded.events[i]._embedded.venues[0].location.longitude}`);
       $("#events").append(`<li><b>${checkText(json._embedded.events[i].name)}</b>
       <p><u>Venue:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].name)}</p>
-          <p><u>Date of Event:</u> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
-          <p><u>Distance in Miles:</u> ${checkValue(json._embedded.events[i].distance)}</p>
-          <p><u>Address:</u> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
+          <p><i>Date of Event:</i> ${checkText(json._embedded.events[i].dates.start.localDate)}</p>
+          <p><i>Distance in Miles:</i> ${checkValue(json._embedded.events[i].distance)}</p>
+          <p><i>Address:</i> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
           <form id="form2">
           <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
           <button type="button" for="startaddress" onclick="displayRadioValue()"> 
@@ -239,6 +239,8 @@ function initMap2() {
       }
     });
   }
+
+// the function is ran each time the get directions button is pressed.
 
 function displayRadioValue() { 
   $('#right-panel').removeClass('hidden');  
