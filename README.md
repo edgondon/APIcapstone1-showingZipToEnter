@@ -5,7 +5,7 @@ Each time the user enters a new search (and presses the submit button), the scre
 
 ## User will be able to input filters (parameters) for search here. 
 
-![MainFilter] (https://github.com/edgondon/APIcapstone1/blob/master/screenshots/MainFilters.png)
+![MainFilter] (/edgondon/APIcapstone1/blob/master/screenshots/MainFilters.png)
 
 ## User will be able to Navigate to Link to Purchase Tickets here.
 
