@@ -152,15 +152,15 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 $('#form1').append(`
 <div id="fline1">
 <div>
-<label class="lab1" for="Radius">Radius of Search in Miles</label>
+<label class="lab1" for="radiuss">Radius of Search in Miles</label>
 <input type="number" id="radiuss" name="Radius" min="1" max="100" value="25" required>
 </div>
 <div>
-<label class="lab1" for="State">Begin Event Date</label>
+<label class="lab1" for="alpha">Begin Event Date</label>
 <input type="date" id="alpha" name="State" value="${today}" required>
 </div>
 <div>
-<label class="lab1" for="numSearch">End Event Date</label>
+<label class="lab1" for="omega">End Event Date</label>
 <input type="date" id="omega" name="numSearch" value="${today2}">
 </div>
 </div>
