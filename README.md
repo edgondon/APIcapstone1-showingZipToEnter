@@ -9,12 +9,17 @@ Each time the user enters a new search (and presses the submit button), the scre
 
 ## User will be able to Navigate to Link to Purchase Tickets here.
 
-screenshots\GetTickets.png
+![GetTickets](https://github.com/edgondon/APIcapstone1/blob/master/screenshots/GetTickets.png)
+
 
 ## User will be able to get both Map (visual) directions and a step by step written instructions list to their selected location.
 
-screenshots\GetDirections.png
+![MapDirections](https://github.com/edgondon/APIcapstone1/blob/master/screenshots/MapDirections.png)
 
-screenshots\MapDirections.png
+![GetDirections](https://github.com/edgondon/APIcapstone1/blob/master/screenshots/GetDirections.png)
+
+
+
+
 
 
