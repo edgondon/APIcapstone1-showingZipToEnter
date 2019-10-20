@@ -85,7 +85,7 @@ function showEvents(json) {
           <p><i>Distance in Miles:</i> ${checkValue(json._embedded.events[i].distance)}</p>
           <p><i>Address:</i> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(output)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
           <form id="form2">
-          <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
+          <input type="radio" id="start" class="helper" aria-controls="right-panel map" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkText(json._embedded.events[i]._embedded.venues[0].state.stateCode)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
           <button type="button" for="startaddress" onclick="displayRadioValue()"> 
               Submit 
           </button> 
@@ -104,7 +104,7 @@ function showEvents(json) {
           <p><i>Distance in Miles:</i> ${checkValue(json._embedded.events[i].distance)}</p>
           <p><i>Address:</i> ${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}</p>
           <form id="form2">
-          <input type="radio" id="start" class="helper" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
+          <input type="radio" id="start" class="helper" aria-controls="right-panel map" name="startaddress" value="${checkText(json._embedded.events[i]._embedded.venues[0].address.line1)}, ${checkText(json._embedded.events[i]._embedded.venues[0].city.name)}, ${checkValue(json._embedded.events[i]._embedded.venues[0].postalCode)}">Get Directions</input>
           <button type="button" for="startaddress" onclick="displayRadioValue()"> 
               Submit 
           </button> 
@@ -163,7 +163,7 @@ $('#form1').append(`
 </div>
 </fieldset>
 <div id="fline2">
-<input type="submit" class="button1" value="Submit Request">
+<input type="submit" aria-controls="events" class="button1" value="Submit Request">
 </div>`);
 
   
@@ -262,8 +262,10 @@ function watchEnter() {
     datesinConsole();
     $('#form1').submit(event => {
         event.preventDefault();
+        $('#right-panel').addClass('hidden');
         $('#right-panel').empty();
         $('.results').empty();
+        $('#events').empty();
 // each time user submits form on top of page the three values below are reset accordingly:
         let alpha = $('#alpha').val();
         let omega = $('#omega').val();
