@@ -91,7 +91,7 @@ function showEvents(json) {
           </button> 
           </form>
           <div class="blunk">
-          <a class="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+          <a class="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Get Tickets</a>
           </div>
           </li>
           `);
@@ -110,7 +110,7 @@ function showEvents(json) {
           </button> 
           </form>
           <div class="blunk">
-          <a id="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Link for Tickets</a>
+          <a id="blink" href="${checkURL(json._embedded.events[i].url)}" target="_blank">Get Tickets</a>
           </div>
           </li>
           `);
@@ -142,15 +142,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     if (day < 10) 
         day = "0" + day;
     let today = now.getFullYear() + '-' + month + '-' + day;
-    console.log(today);
 
     let month2 = (now.getMonth() + 2);
     let today2 = now.getFullYear() + '-' + month2 + '-' + day;
-    console.log(today2);
 
 
 $('#form1').append(`
-<div id="fline1">
+<fieldset id="fline1">
 <div>
 <label class="lab1" for="radiuss">Radius of Search in Miles</label>
 <input type="number" id="radiuss" name="Radius" min="1" max="100" value="25" required>
@@ -163,7 +161,7 @@ $('#form1').append(`
 <label class="lab1" for="omega">End Event Date</label>
 <input type="date" id="omega" name="numSearch" value="${today2}">
 </div>
-</div>
+</fieldset>
 <div id="fline2">
 <input type="submit" class="button1" value="Submit Request">
 </div>`);
@@ -174,22 +172,19 @@ $('#form1').append(`
 
 function infosubmit (alpha, omega, radiuss) {
     
-    console.log(longlat);
-    console.log(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${longlat[0].lat},${longlat[0].lng}&unit=miles&radius=${radiuss}&startDateTime=${alpha}T08:00:00Z&endDateTime=${omega}T07:59:00Z&size=190`);
+    
      $.ajax({
         type:"GET",
         url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=xBC9IrvS6UOYGWmTT1OSvOSVKpalT8XA&latlong=${longlat[0].lat},${longlat[0].lng}&unit=miles&radius=${radiuss}&startDateTime=${alpha}T08:00:00Z&endDateTime=${omega}T07:59:00Z&size=190`,
         async:true,
         dataType: "json",
         success: function(json) {
-                    console.log(json);
                     let e = document.getElementById("events");
                     e.innerHTML = json.page.totalElements + " events found.";
                     showEvents(json);
                     
                  },
         error: function(xhr, status, err) {
-                    console.log(err);
                  }
       }); 
 
@@ -224,8 +219,6 @@ function initMap2() {
 
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = `${longlat[0].lat},${longlat[0].lng}`;
-    console.log(start);
-    console.log(`${addressGo}`);
     let end = `${addressGo}`;
     directionsService.route({
       origin: start,
@@ -248,7 +241,6 @@ function displayRadioValue() {
     $('#right-panel').empty();
     let ele = $('.helper:checked').val(); 
     addressGo.push(ele);    
-    console.log(ele);
     initMap2();
     $('.helper:checked').prop('checked', false);
     } 
@@ -284,7 +276,6 @@ function watchEnter() {
         
         infosubmit(alpha, omega, radiuss);
         
-        console.log('hello');
         
     });
 
