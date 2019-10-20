@@ -163,7 +163,6 @@ $('#form1').append(`
 <label class="lab1" for="omega">End Event Date</label>
 <input type="date" id="omega" name="numSearch" value="${today2}">
 </div>
-</div>
 <div id="fline2">
 <input type="submit" class="button1" value="Submit Request">
 </div>`);
