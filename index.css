@@ -168,6 +168,18 @@ li {
 
     }
 
+    #formZip {
+      background-color: rgb(176, 167, 231);
+      -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+      box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+      width: 60%;
+      margin-bottom: 30px;
+      padding: 30px;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
     #fline1 {
       display: flex;
       flex-direction: column;
@@ -219,6 +231,18 @@ li {
 
         
     #form1 {
+      background-color: rgb(176, 167, 231);
+      -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+      box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+      width: 60%;
+      margin-bottom: 30px;
+      padding: 30px;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+    #formZip {
       background-color: rgb(176, 167, 231);
       -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
       box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);

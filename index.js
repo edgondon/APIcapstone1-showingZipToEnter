@@ -124,6 +124,14 @@ function showEvents(json) {
 
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  $('#form1').AddClass('hidden');
+  $('#formZip').append(`
+  <fieldset id="fline1">
+  <div>
+  <label class="lab1" for="addrez">Enter Current Address</label>
+  <input type="text" id="addrez" name="Address" value="41680 Nordal, Hemet, CA" required>
+  </div>
+  `);
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
         'Error: The Geolocation service failed.' :
