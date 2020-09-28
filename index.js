@@ -298,4 +298,4 @@ function watchEnter() {
 
 }
 
-$(watchEnter);
+$(Locaz);
